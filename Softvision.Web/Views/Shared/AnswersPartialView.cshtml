@@ -1,0 +1,31 @@
+﻿@model List<Softvision.BL.Entities.AnswerBL>
+
+@using Softvision.BL.Entities;
+
+@foreach (var answer in Model)
+{
+    var answerUpID = "answerUp" + answer.Id;
+    var answerDownID = "answerDown" + answer.Id;
+    var answerVoteID = "answerVote" + answer.Id;
+        
+<div class="col-md-1 col-sm-2 col-xs-2  leftPanel">
+    <div class="upVote" id=@answerUpID onclick="AjaxUpdateAnswerVote(@answer.Id, 1)"> </div>
+    <div class="voteScore" id=@answerVoteID>@answer.Vote</div>
+    @if (answer.Flag == AnswerFlags.Correct)
+    {
+        <div class="correctDiv"></div>
+    }else if (Softvision.All.Helpers.Base.BaseMVC.getUserId() != 0 && answer.IdUserQuestion == Softvision.All.Helpers.Base.BaseMVC.getUserId())
+    {
+        <div onclick="UpdateAnswerStatus(@answer.Id, 1, @answer.IdQuestion)">Mark as correct</div>
+    }
+    <div class="downVote" id=@answerDownID onclick="AjaxUpdateAnswerVote(@answer.Id, -1)"></div>
+</div>
+<div>
+    @("On " + answer.CreatedDate)
+    <b>@Html.ActionLink((answer.UserFirstName + " " + answer.UserLastName), "Details", "Author", new { id = answer.IdUser }, null) </b> <span>said:</span><br />
+</div>
+<div class="col-md-11 col-sm-10 col-xs-10 rightPanel articleComment">
+    @* The question text *@
+    @Html.Raw(answer.HTMLRep)
+</div>
+}

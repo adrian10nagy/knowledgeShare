@@ -1,0 +1,315 @@
+.inlineDiv {
+    background-color: #D1D1D1;
+    margin-bottom: 2px;
+    padding: 5px;
+    border-radius: 3px;
+}
+
+.scoreInlineDiv {
+    display: inline;
+}
+
+.titleInlineDiv {
+    display: inline;
+}
+
+.marginBottom {
+    margin-bottom: 5px;
+}
+
+
+/* Article tags*/
+
+.codeArticleText {
+    background: #000;
+    padding: 10px;
+    margin-bottom: 15px;
+    margin-top: 15px;
+    display: block;
+}
+
+.codeText {
+    background: #000;
+    padding: 10px;
+    margin-bottom: 15px;
+    margin-top: 15px;
+    display: block;
+    color: white;
+}
+
+.articleCodeLineNr {
+    border-right: 4px groove red;
+    padding: 3px;
+    padding-right: 5px;
+    margin-right: 15px;
+}
+
+.articleCodeLine {
+    background-color: black;
+    color: white;
+}
+
+.leftPanel {
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.rightPanel {
+}
+
+.InsertComment {
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+.comments {
+    display: inline-block;
+    margin-top: 50px;
+}
+
+.articleComment {
+    padding: 10px;
+    background-color: #E3E3E3;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    min-height: 100px;
+}
+
+.articleHistory {
+    margin-top: 10px;
+    padding: 10px;
+    padding-top: 10px;
+    border: 1px solid black;
+}
+
+.allComments {
+    padding-left: 2px;
+}
+
+.userSquareMain {
+    display: inline-block;
+    margin: 10px;
+    padding: 5px;
+}
+
+.userSquareAuthor {
+    background: url("/images/author.png");
+    background-size: 120px 100px;
+    background-repeat: no-repeat;
+    display: inline-block;
+    height: 100px;
+    width: 120px;
+    color: white;
+    font-style: oblique;
+}
+
+/* end article */
+footer {
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    text-align: center;
+    margin-bottom: 0px;
+}
+
+
+/* General */
+/*textarea {
+    resize: none;
+    height: 100px;
+    width: 100px;
+    margin-bottom: 20px;
+    padding: 10px;
+}*/
+
+.replyTextarea {
+    height: 100px;
+}
+
+.correctDiv {
+    width: 50px; /*width of your image*/
+    height: 50px; /*height of your image*/
+    background-image: url(../Images/correct.png);
+    margin-bottom: 10px;
+}
+
+.createBox {
+    padding: 20px;
+    background-color: #74ED8E;
+}
+
+#trash {
+    height: 200px;
+    width: 100%;
+    padding: 10px;
+    background-color: red;
+    font-weight: bold;
+}
+
+.displayContextMain {
+    margin-bottom: 90px;
+}
+
+.displayInlineDiv {
+    display: inline-block;
+}
+/* Votes- general */
+.upVote {
+    width: 60px; /*width of your image*/
+    height: 20px; /*height of your image*/
+    background-image: url(../Images/voteUp.png);
+}
+
+.downVote {
+    width: 60px; /*width of your image*/
+    height: 20px; /*height of your image*/
+    background-image: url(../Images/votedown.png);
+}
+
+    .downVote:hover {
+        opacity: 0.6;
+    }
+
+.upVote:hover {
+    opacity: 0.6;
+}
+
+.voteScore {
+    text-align: center;
+    width: 60px;
+}
+
+#voteScore {
+    padding: 5px;
+    text-align: center;
+}
+
+/* Votes- Question */
+#upVoteQuestion {
+    width: 60px; /*width of your image*/
+    height: 20px; /*height of your image*/
+    background-image: url(../Images/voteup.png);
+}
+
+#downVoteQuestion {
+    width: 60px;
+    height: 20px;
+    background-image: url(../Images/votedown.png);
+}
+
+#upVotedQuestion {
+    width: 60px;
+    height: 20px;
+    background-image: url(../Images/votedup.png);
+}
+
+#downVotedQuestion {
+    width: 60px;
+    height: 20px;
+    background-image: url(../Images/voteddown.png);
+}
+/* Votes- Article */
+#upVoteArticle {
+    width: 60px;
+    height: 20px;
+    background-image: url(../Images/voteup.png);
+}
+
+#downVoteArticle {
+    width: 60px;
+    height: 20px;
+    background-image: url(../Images/votedown.png);
+}
+
+#upVotedArticle {
+    width: 60px;
+    height: 20px;
+    background-image: url(../Images/votedup.png);
+}
+
+#downVotedArticle {
+    width: 60px;
+    height: 20px;
+    background-image: url(../Images/voteddown.png);
+}
+
+.downVoted {
+    width: 60px;
+    height: 20px;
+    background-image: url(../Images/voteddown.png);
+}
+
+.upVoted {
+    width: 60px;
+    height: 20px;
+    background-image: url(../Images/votedup.png);
+}
+
+/* Votes- END */
+.inlineInput {
+    display: inline;
+    margin-right: 5px;
+}
+
+.paddingTop {
+    padding-top: 15px;
+}
+
+#loginDiv {
+    max-width: 380px;
+    padding: 15px 35px 45px;
+    margin: 0 auto;
+    background-color: #fff;
+    border: 1px solid rgba(0,0,0,0.1);
+    border-radius: 10px;
+    margin-top: 35px;
+}
+
+input {
+    margin-bottom: 10px;
+}
+
+
+/** Nav Bar */
+.navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
+    color: white; /*Sets the text hover color on navbar*/
+    background-color: #1B6D90;
+    border-radius: 5px;
+}
+
+.navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus {
+    color: white; /*BACKGROUND color for active*/
+    background-color: #030033;
+}
+
+.navbar-default {
+    background-color: #185f7d;
+    border-color: #185f7d;
+}
+
+.dropdown-menu > li > a:hover,
+.dropdown-menu > li > a:focus {
+    color: #262626;
+    text-decoration: none;
+    background-color: #66CCFF; /*change color of links in drop down here*/
+}
+
+.nav > li > a:hover,
+.nav > li > a:focus {
+    text-decoration: none;
+    background-color: silver; /*Change rollover cell color here*/
+}
+
+
+.navbar-default .navbar-nav > li > a {
+    color: white; /*Change active text color here*/
+}
+
+.navbar-default .navbar-brand {
+    color: white;
+}
+
+    .navbar-default .navbar-brand:hover,
+    .navbar-default .navbar-brand:focus {
+        color: #CACACA;
+    }

@@ -1,0 +1,27 @@
+﻿@model List<Softvision.BL.Entities.QuestionBL>
+
+@using Softvision.BL.Entities;
+
+@foreach (var question in Model)
+{
+    <div class="inlineDiv marginBottom">
+        <div class="scoreInlineDiv">
+            @Html.DisplayFor(a => question.Vote)
+            <span class="glyphicon  glyphicon-ok" aria-hidden="true"></span>
+        </div>
+        <div class="scoreInlineDiv">
+            @Html.DisplayFor(a => question.CreatedDate)
+            <span class="glyphicon  glyphicon-calendar" aria-hidden="true"></span>
+        </div>
+        <div class="titleInlineDiv">
+            @{
+    var qTitle = Server.HtmlEncode(question.Title).Replace(" ", "-").Replace("?", string.Empty);
+    var qId = question.Id;
+            }
+
+            @Html.ActionLink(@Html.DisplayFor(a => question.Title).ToString(), "Details", "Question",
+                         new { id = qId + "/" + qTitle }, null)
+        </div>
+        <br />
+    </div>
+}

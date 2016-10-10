@@ -1,0 +1,45 @@
+﻿@using Softvision.BL.Entities;
+@using Softvision.BL.Helpers;
+
+@{
+    ViewBag.Title = "Profile";
+    var user = (UserBL)ViewData["user"];
+    var emailPreference = user.EmailPreference;
+
+    var emailsAll = (emailPreference.HasFlag(EmailPreferenceBL.All));
+    var emailsAnswers = (emailsAll && !emailPreference.HasFlag(EmailPreferenceBL.NoAnswers));
+    var emailsArticles = (emailsAll && !emailPreference.HasFlag(EmailPreferenceBL.NoArticles));
+    var emailsComments = (emailsAll && !emailPreference.HasFlag(EmailPreferenceBL.NoComments));
+    var emailsQuestions = (emailsAll && !emailPreference.HasFlag(EmailPreferenceBL.NoQuestions));
+    var emailsNewsletter = (emailsAll && !emailPreference.HasFlag(EmailPreferenceBL.NoNewsletter));
+}
+
+<h2>My Profile</h2>
+
+<div class="row">
+    <div class="col-sm-12">
+        <p> <strong>@user.FirstName @user.LastName</strong>, you are a member since @user.JoinDate</p>
+    </div>
+    <div class="col-md-6 col-xs-12">
+        <img src="~/Images/noimg.jpg" alt="No Image" />
+    </div>
+
+    <div class="col-md-6 col-xs-12">
+        <button class="btn btn-default"> @Html.ActionLink("Change password", "ChangePassword") </button> <br /><br />
+        <button class="btn btn-default"> @Html.ActionLink("Lost password", "LostPassword") </button><br />
+
+
+        @using (Html.BeginForm("EmailPreference", "User", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            @Html.ValidationSummary(true)
+            @Html.CheckBox("chkEmailPreferenceNewslettter", emailsNewsletter) <span>Recieve newsletter emails: </span><br />
+            @Html.CheckBox("chkEmailPreferenceArticle", emailsArticles) <span>Recieve emails when a new article is added: </span><br />
+            @Html.CheckBox("chkEmailPreferenceQuestion", emailsQuestions) <span>Recieve emails when a new question is asked : </span><br />
+            @Html.CheckBox("chkEmailPreferenceAnswers", emailsAnswers) <span>Recieve emails when a new answer is posted to your questions : </span><br />
+            @Html.CheckBox("chkEmailPreferenceComments", emailsComments) <span>Recieve emails when a new comment is posted to your article: </span><br />
+
+            <br />
+            <input type="submit" id="btnUserEmailPreference" name="btnUserEmailPreference" value="Submit Preference" class="btn btn-lg btn-block btn-info" />
+        }
+    </div>
+</div>

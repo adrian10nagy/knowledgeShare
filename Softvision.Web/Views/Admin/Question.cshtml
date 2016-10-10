@@ -1,0 +1,79 @@
+﻿@model Softvision.BL.Entities.QuestionBL
+@using Softvision.All.Helpers.Base;
+@using Softvision.BL.Entities;
+
+@{
+    var title = Model.Title;
+    var subCategory = Model.SubCategory;
+    var userId = Model.IdUser;
+    var loggedUserId = BaseMVC.IsLoggedIn();
+    var articleId = Model.Id;
+    ViewBag.Title = subCategory + "| " + title;
+}
+
+<h2>@Html.DisplayFor(model => model.Title)</h2>
+
+<div class="col-md-12 col-sm-12 col-xs-12">
+    <h4>@subCategory</h4>
+    <hr />
+    <div class="col-md-9 col-sm-12 leftPanel">
+        <div class="col-md-1 col-sm-1 col-xs-3  leftPanel" id="votesPV">
+
+        </div>
+        <div class="col-md-11 col-sm-11 col-xs-9 rightPanel">
+            @* The question text *@
+            @Html.Raw(Model.HTMLRep)
+        </div>
+    </div>
+    <div class="col-md-3 hidden-xs rightPanel">
+
+        <table>
+            <tr>
+                <td>Asked On:</td>
+
+                <td>
+                    @Html.DisplayFor(model => model.CreatedDate)
+                </td>
+            </tr>
+        </table>
+    </div>
+
+</div>
+<br />
+<div class="comments col-md-12 col-sm-12 col-xs-12">
+    @* Inserting new comment *@
+    <div class="InsertComment">
+        <form action="/" method="post" name="addQuestion" id="addQuestion">
+            <input type="hidden" id="idUser" name="idUser" value=@(userId != null ? userId: 2)>
+            <input type="hidden" id="idQuestion" name="idQuestion" value=@Html.DisplayFor(model=>model.Id)>
+            <input type="hidden" id="CreatedDate" name="CreatedDate" value=@DateTime.Now.TimeOfDay />
+            @if (!loggedUserId)
+            {
+                @Html.TextBox("AnonymousName", null, new { @placeholder = "Name", @class = "form-control inlineInput" })
+                @Html.TextBox("AnonymousEmail", null, new { @placeholder = "Email", @class = "form-control inlineInput" })  <br /><br />
+            }
+            else
+            {
+                @: Answer as
+                <b>@Html.DisplayName(Session["userFirstName"].ToString())</b>
+                <input type="hidden" id="AnonymousName" name="AnonymousName" />
+                <input type="hidden" id="AnonymousEmail" name="AnonymousEmail" />
+            }
+            <div>
+                @Html.Partial("~/Views/Shared/Helpers/_textEditor.cshtml", new WritingBL { })
+            </div>
+
+            <input type="button" id="btnAddQuestion" name="btnAddQuestion" value="Add answer " />
+        </form>
+    </div>
+    @* All comments *@
+    <div class="allComments col-sm-12 col-xs-12" id="allQuestionAnswers">
+    </div>
+</div>
+
+<script type="text/javascript" language="javascript">
+    window.onload = function () {
+        updateQuestionsAnswersAdmin(@Model.Id)
+        updateQuestionVotePV(@Model.Vote, @Model.Id)
+    };
+</script>

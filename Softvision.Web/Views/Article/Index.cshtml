@@ -1,0 +1,25 @@
+﻿@{
+    ViewBag.Title = "All articles | Developers Place";
+}
+
+@using Softvision.BL.Entities;
+
+<div class="row">
+    <div class="paddingTop">
+        <p>@Html.ActionLink("Write an article", "NewArticle", "Article", null, new { @class = "btn btn-default" })</p>
+    </div>
+    <div class="col-md-12">
+        <hr />
+        <p>All articles! Choose one and contribute to the community</p>
+        @*important for ajax call*@
+        <div id="allArticles"></div>
+    </div>
+</div>
+
+
+
+<script type="text/javascript" language="javascript">
+    window.onload = function () {
+        updateArticles()
+    };
+</script>

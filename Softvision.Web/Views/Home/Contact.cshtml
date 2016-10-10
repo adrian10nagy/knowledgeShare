@@ -1,0 +1,27 @@
+﻿@{
+    ViewBag.Title = "Contact Developers Place";
+}
+
+<h2>@ViewBag.Title.</h2>
+<h3>@ViewBag.Message</h3>
+
+<address>
+    Romania<br />
+    <abbr title="Email">Email:</abbr>
+    adrian1nagy@yahoo.com
+</address>
+
+<address>
+    <strong>Support:</strong>   <a href="contact@knowledgeShare.ro">Contact@knowledgeShare.ro</a><br />
+    <strong>Marketing:</strong> <a href="office@knowledgeShare.ro">Office@knowledgeShare.ro</a>
+</address>
+
+
+<form action="/Home/SendMessage" method="post">
+    @Html.TextBox("email", null, new { @placeholder = "Email", @class = "form-control inlineInput" }) <br /><br />
+    @Html.TextBox("subject", null, new { @placeholder = "Subject", @class = "form-control inlineInput" })  <br /><br />
+    @Html.TextBox("message", null, new { @placeholder = "Message", @class = "form-control inlineInput" })
+
+    <input type="submit" id="btnSendMessage" name="btnSendMessage" value="Send message" />
+</form>
+

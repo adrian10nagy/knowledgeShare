@@ -1,0 +1,22 @@
+﻿@model IEnumerable<Softvision.BL.Entities.UserBL>
+
+@{
+    ViewBag.Title = "Authors & Colaborators";
+}
+
+<h2>Authors and colaborators</h2>
+
+<p>
+    @Html.ActionLink("Become an author!", "Register", "User")
+</p>
+@foreach (var item in Model)
+{
+    <div class="userSquareMain">
+        <div class="userSquareAuthor">
+
+        </div>
+        <div>
+            @Html.ActionLink(@item.FirstName, "Details", "Author", new { id = item.Id }, null)
+        </div>
+    </div>
+}

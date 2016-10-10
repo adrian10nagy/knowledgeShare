@@ -1,0 +1,36 @@
+﻿@using Softvision.BL.Entities;
+
+@{
+    ViewBag.Title = "UsersAccess";
+    var users = (IEnumerable<UserBL>)ViewData["users"];
+    var accessType = new List<int>(){ 0, 1 };
+    
+}
+
+<h2>Users Access</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+
+    <div class="form-group">
+        @Html.Label("User", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownList("drpUser", new SelectList(users, "Id", "FirstName"), new { @class = "form-control" })
+        </div>
+    </div>
+    
+    <div class="form-group">
+        @Html.Label("Access", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownList("drpAccessType", new SelectList(accessType), new { @class = "form-control" })
+        </div>
+    </div>
+
+    @* Save Article *@
+    <div>
+        <input type="submit" value="Save and Post" id="btnCategoryCreate" class="btn btn-default" />
+    </div>
+}

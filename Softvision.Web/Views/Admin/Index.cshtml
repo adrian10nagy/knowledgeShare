@@ -1,0 +1,30 @@
+﻿@{
+    ViewBag.Title = "All questions and answers | Developers Place";
+}
+
+@using Softvision.BL.Entities;
+
+
+<div class="row">
+    <div class="col-md-6">
+        <hr />
+        <p>All Questions!</p>
+        @*important for ajax call*@
+        <div id="allAdminQuestions"></div>
+    </div>
+
+    <div class="col-md-6">
+        <hr />
+        <p>All articles!</p>
+        @*important for ajax call*@
+        <div id="allAdminArticles"></div>
+    </div>
+</div>
+
+
+<script type="text/javascript" language="javascript">
+    window.onload = function () {
+        updateAdminQuestions()
+        updateAdminArticles()
+    };
+</script>

@@ -1,0 +1,33 @@
+﻿@using Softvision.BL.Entities;
+
+@{
+    ViewBag.Title = "Subcategory";
+}
+
+<h2>Subcategory</h2>
+
+<p>Top rated articles</p>
+<div class="mainDiv">
+    @foreach (var article in (List<ArticleBL>)ViewData["articles"])
+    {
+        <div class="inlineDiv marginBottom">
+            <div class="scoreInlineDiv">
+                @Html.DisplayFor(a => article.Vote)
+                <span class="glyphicon  glyphicon-ok" aria-hidden="true"></span>
+            </div>
+            <div class="scoreInlineDiv">
+                @Html.DisplayFor(a => article.Comments.Count)
+                <span class="glyphicon  glyphicon-comment" aria-hidden="true"></span>
+            </div>
+            <div class="titleInlineDiv">
+                @{
+        var aTitle = Server.HtmlEncode(article.Title).Replace(".", "-").Replace(" ", "-").Replace("?", string.Empty);
+        var aId = article.Id;
+                }
+                @Html.ActionLink(@Html.DisplayFor(a => article.Title).ToString(), "Details", "Article",
+                         new { id = aId + "/" + aTitle }, null)
+            </div>
+            <br />
+        </div>
+    }
+</div>

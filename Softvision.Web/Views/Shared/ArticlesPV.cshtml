@@ -1,0 +1,26 @@
+﻿@model List<Softvision.BL.Entities.ArticleBL>
+
+@using Softvision.BL.Entities;
+
+@foreach (var article in Model)
+{
+    <div class="inlineDiv marginBottom">
+        <div class="scoreInlineDiv">
+            @Html.DisplayFor(a => article.Vote)
+            <span class="glyphicon  glyphicon-ok" aria-hidden="true"></span>
+        </div>
+        <div class="scoreInlineDiv">
+            @Html.DisplayFor(a => article.CreatedDate)
+            <span class="glyphicon  glyphicon-calendar" aria-hidden="true"></span>
+        </div>
+        <div class="titleInlineDiv">
+            @{
+    var aTitle = article.Title.Replace(" ", "-").Replace(".", "-").Replace(":", "-").Replace("!", "-").Replace("?", "-").Replace("$", "-");
+    var aId = article.Id;
+            }
+            @Html.ActionLink(@Html.DisplayFor(a => article.Title).ToString(), "Details", "Article",
+                         new { id = aId + "/" + aTitle }, null)
+        </div>
+        <br />
+    </div>
+}

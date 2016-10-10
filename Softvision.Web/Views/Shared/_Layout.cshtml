@@ -1,0 +1,99 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Knowledge Share</title>
+    <meta name="description" content="@ViewBag.MetaDescription" />
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/main")
+    @Styles.Render("~/Content/jquery-ui")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <div class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Knowledge Share", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Articles", "Index", "Article", null, null)</li>
+                    <li>@Html.ActionLink("Questions", "Index", "Question", null, null)</li>
+                    <li>@Html.ActionLink("Authors& Co.", "Index", "Author", null, null)</li>
+                    @if (Softvision.All.Helpers.Base.BaseMVC.IsAdmin())
+                    {
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Admin Tab <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li>@Html.ActionLink("Manage A+Q", "Index", "Admin", null, null)</li>
+                                <li>@Html.ActionLink("Add new Subcategory", "NewSubcategory", "Admin", null, null)</li>
+                                <li>@Html.ActionLink("Add new Category", "NewCategory", "Admin", null, null)</li>
+                                <li>@Html.ActionLink("Manage Users Acces", "UsersAccess", "Admin", null, null)</li>
+                            </ul>
+                        </li>
+                    }
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    @if (!Softvision.All.Helpers.Base.BaseMVC.IsLoggedIn())
+                    {
+                        <li>@Html.ActionLink("Register", "Register", "User", null, null)</li>
+                        <li>@Html.ActionLink("Log in", "Login", "User", null, null)</li>
+                    }
+                    else
+                    {
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">My Account <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li>@Html.ActionLink("My profile", "Profile", "User", null, null)</li>
+                                <li>@Html.ActionLink("My articles", "MyArticles", "User", null, null)</li>
+                                <li>@Html.ActionLink("My questions", "MyQuestions", "User", null, null)</li>
+                                <li>@Html.ActionLink("Questions I answered to", "MyContributions", "User", null, null)</li>
+                                <li role="separator" class="divider"></li>
+                                <li> @Html.ActionLink("Log out", "Logout", "User", new { @class = "loginNavbar" }, null)</li>
+                            </ul>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Knowledge Share</p>
+            <div class="col-md-6">
+                <p>@Html.ActionLink("Contact", "Contact", "Home", null, null)</p>
+                <p>@Html.ActionLink("Join our Author comunity ", "Register", "User", new { @class = "loginNavbar" }, null)</p>
+                <p><a href="https://www.facebook.com/Knowledge-Share-1661823660750306">Follow us on Facebook</a></p>
+            </div>
+            <div class="col-md-6">
+
+                <p>City: Cluj-Napoca</p>
+                <p>Email:</p>
+                <p>contact@knowledgeshare.ro</p>
+                <p>office@knowledgeshare.ro</p>
+            </div>
+        </footer>
+    </div>
+
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jquery-ui")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+    @Scripts.Render("~/bundles/question")
+    @Scripts.Render("~/bundles/article")
+    @Scripts.Render("~/bundles/common")
+    @Scripts.Render("~/bundles/trueEditorPV")
+    @Scripts.Render("~/bundles/generalValidation")
+
+</body>
+</html>

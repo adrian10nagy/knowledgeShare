@@ -1,0 +1,27 @@
+﻿@model List<Softvision.BL.Entities.CommentBL>
+
+@foreach (var comment in Model)
+{
+    if (comment.TextField != null)
+    {
+        var commentUpID = "commentUp" + comment.Id;
+        var commentDownID = "commentDown" + comment.Id;
+        var commentVoteID = "commentVote" + comment.Id;
+
+        <div class="col-md-1 col-sm-2 col-xs-2  leftPanel">
+            <div class="upVote" id=@commentUpID onclick="AjaxUpdateCommentVote(@comment.Id, 1)"> </div>
+            <div class="voteScore" id=@commentVoteID>@comment.Vote</div>
+            <div class="downVote" id=@commentDownID onclick="AjaxUpdateCommentVote(@comment.Id, -1)"></div>
+        </div>
+        if (comment.User != null && comment.User.Id != null && comment.User.FirstName != string.Empty && comment.User.LastName != string.Empty)
+        {
+            <div>
+                @("On " + comment.CreatedDate)
+                <b>@Html.ActionLink((comment.User.FirstName + " " + comment.User.LastName), "Details", "Author", new { id = comment.User.Id }, null) </b> <span>said:</span><br />
+            </div>
+        }
+        <div class="col-md-11 col-sm-10 col-xs-10 rightPanel articleComment">
+            @comment.TextField
+        </div>
+    }
+}

@@ -1,0 +1,47 @@
+﻿.editorMain {
+    padding: 25px;
+    padding-left: 40px;
+    padding-right: 40px;
+    border: 2px solid gray;
+    border-radius: 10px;
+    background-color: #ECF0F1;
+    display: inline-block;
+}
+
+.textareaContainer {
+    display: block;
+    border: 3px solid #38c;
+    padding: 10px;
+}
+
+#editorTexarea {
+    width: 650px;
+    height: 250px;
+    padding: 5px;
+    resize: none;
+    margin: 0 auto;
+}
+
+#editorButtons {
+    width: 100%;
+}
+
+.editorButton :hover {
+    opacity: 0,7;
+}
+
+.editorButton {
+    height: 25px;
+    width: 25px;
+    display: inline;
+    border: 2px solid black;
+    cursor: pointer;
+    padding: 5px;
+}
+
+#previewDiv {
+    white-space: pre;
+    background-color: #6BAABD;
+    padding: 15px;
+    white-space: pre-wrap;
+}

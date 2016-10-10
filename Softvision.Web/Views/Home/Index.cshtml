@@ -1,0 +1,95 @@
+﻿@{
+    ViewBag.Title = "Developers Place! Welcome";
+}
+
+@using Softvision.BL.Entities;
+
+@Styles.Render("~/Content/main")
+
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="col-md-4 paddingTop">
+            <p>@Html.ActionLink("Ask a question", "Create", "Question", null, new { @class = "btn btn-default" })</p>
+        </div>
+        <div class="col-md-5 paddingTop">
+            <p>@Html.ActionLink("Write an article, Become an author", "NewArticle", "Article", null, new { @class = "btn btn-default" })</p>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <div class="col-md-4">
+            <hr />
+            <p>Top questions</p>
+            <div class="mainDiv">
+                @foreach (var question in (List<QuestionBL>)ViewData["questions"])
+                {
+                    <div class="inlineDiv marginBottom">
+                        <div class="scoreInlineDiv">
+                            @Html.DisplayFor(a => question.Vote)
+                            <span class="glyphicon  glyphicon-ok" aria-hidden="true"></span>
+                        </div>
+                        <div class="scoreInlineDiv">
+                            @Html.DisplayFor(a => question.Answers.Count)
+                            <span class="glyphicon  glyphicon-comment" aria-hidden="true"></span>
+                        </div>
+                        <div class="titleInlineDiv">
+                            @{
+                    var qTitle = Server.HtmlEncode(question.Title).Replace(" ", "-");
+                    var qId = question.Id;
+                            }
+                            @Html.ActionLink(@Html.DisplayFor(a => question.Title).ToString(), "Details", "Question",
+                         new { id = qId + "/" + qTitle }, null)
+                        </div>
+                        <br />
+                    </div>
+                }
+            </div>
+        </div>
+        <div class="col-md-5">
+            <hr />
+            <p>Top rated articles</p>
+            <div class="mainDiv">
+                @foreach (var article in (List<ArticleBL>)ViewData["articles"])
+                {
+                    <div class="inlineDiv marginBottom">
+                        <div class="scoreInlineDiv">
+                            @Html.DisplayFor(a => article.Vote)
+                            <span class="glyphicon  glyphicon-ok" aria-hidden="true"></span>
+                        </div>
+                        <div class="scoreInlineDiv">
+                            @Html.DisplayFor(a => article.Comments.Count)
+                            <span class="glyphicon  glyphicon-comment" aria-hidden="true"></span>
+                        </div>
+                        <div class="titleInlineDiv">
+                            @{
+                    var aTitle = Server.HtmlEncode(article.Title).Replace(" ", "-");
+                    var aId = article.Id;
+                            }
+                            @Html.ActionLink(((@article.Language != LanguageBL.English) ? "[" + @article.Language + "] " : string.Empty)+ @Html.DisplayFor(a => article.Title).ToString(), "Details", "Article",
+                         new { id = aId + "/" + aTitle }, null)
+                        </div>
+                        <br />
+                    </div>
+                }
+            </div>
+        </div>
+        <div class="col-md-3 hidden-xs">
+            <br />
+            <div>
+                @RenderPage("~/Views/Shared/Helpers/_facebookPlugin.cshtml")
+            </div>
+            <div class="articleHistory">
+                <p>Article History</p>
+                @foreach (var articlesPerMonth in (List<ArticlesPerMonth>)ViewData["articlesPerMonth"])
+                {
+                    var display = @articlesPerMonth.Year +" " + @System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(articlesPerMonth.Month) + " ( " +@articlesPerMonth.articles.Count() +" )";
+                    
+                    <div>
+                        @Html.ActionLink(@display, "History", "Article", new { year = articlesPerMonth.Year, month = articlesPerMonth.Month }, null)
+                        
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

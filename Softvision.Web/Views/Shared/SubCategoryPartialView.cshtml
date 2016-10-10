@@ -1,0 +1,10 @@
+﻿@model IEnumerable<Softvision.BL.Entities.SubCategoryBL>
+
+@{    
+    var subcategories = (IEnumerable<Softvision.BL.Entities.SubCategoryBL>)Model;    
+}
+
+@Html.Label("SubCategory", htmlAttributes: new { @class = "control-label col-md-2" })
+<div class="col-md-10">
+    @Html.DropDownList("drpSubCategory", new SelectList(subcategories, "Id", "Name"), new { @class = "form-control" })
+</div>

@@ -1,0 +1,24 @@
+﻿@model Softvision.BL.Entities.QuestionBL
+
+@if (Session["questionVoted" + @Model.Id] != null && 
+    Session["questionVoted" + @Model.Id].ToString() == "1")
+{
+    <div id="upVotedQuestion"></div>
+}
+else
+{
+    <div id="upVoteQuestion"></div>
+}
+<div id="voteScore">@Model.Vote</div>
+
+@if (Session["questionVoted" + @Model.Id] != null && Session["questionVoted" + @Model.Id].ToString() == "-1")
+{
+    <div id="downVotedQuestion"></div>
+}
+else
+{
+    <div id="downVoteQuestion"></div>
+}
+
+@Scripts.Render("~/bundles/questionPV")
+@Scripts.Render("~/bundles/articlePV")

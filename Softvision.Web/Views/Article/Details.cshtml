@@ -1,0 +1,123 @@
+﻿@model Softvision.BL.Entities.ArticleBL
+@using Softvision.All.Helpers.Base;
+@using Softvision.BL.Entities;
+
+@{
+    var title = Model.Title;
+    var subCategory = Model.SubCategory;
+    var userId = Model.IdUser;
+    var isLoggedIn = BaseMVC.IsLoggedIn();
+    var articleId = Model.Id;
+    ViewBag.Title = subCategory + "| " + title;
+    ViewBag.MetaDescription = @Model.Title;
+}
+
+<h1>@title</h1>
+
+<div class="col-md-12 col-sm-12 col-xs-12">
+    See more from: @Html.ActionLink(@subCategory, "SubCategory", "Article", new { id = @Model.IdSubCategory + "/" + @subCategory }, null)  [@Model.Comments.Count()  comments]
+    <hr />
+    <div class="col-md-9 col-sm-12 leftPanel">
+        <div class="col-md-1 col-sm-1 hidden-xs  leftPanel" id="votesPV">
+        </div>
+        <div class="col-md-11 col-sm-11 col-xs-12 rightPanel">
+            @* The article text *@
+            @Html.Raw(Model.HTMLRep)
+        </div>
+    </div>
+    <div class="col-md-3 col-sm-6 hidden-xs rightPanel">
+        <table>
+            <tr>
+                <td>Posted on: </td>
+
+                <td>
+                    @Model.CreatedDate.ToShortDateString()
+                </td>
+            </tr>
+
+            @if (Model.IdUser > 0)
+            {
+                <tr>
+                    <td>Author: </td>
+                    <td>
+                        @Html.ActionLink(Model.User.FirstName + " " + Model.User.LastName, "Details", "Author", new { id = @Model.User.Id }, null)
+                    </td>
+                </tr>
+            }
+            else
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayNameFor(model => model.AnonymousName)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(model => model.AnonymousName)
+                    </td>
+                </tr>
+            }
+
+        </table>
+    </div>
+</div>
+<div>
+    <div class="displayInlineDiv">
+        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        <!-- rectangle1 -->
+        <ins class="adsbygoogle"
+             style="display:inline-block;width:300px;height:250px"
+             data-ad-client="ca-pub-3751770644401019"
+             data-ad-slot="6509088682"></ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+    </div>
+    <div class="displayInlineDiv">
+        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        <!-- rectangle2 -->
+        <ins class="adsbygoogle"
+             style="display:inline-block;width:300px;height:250px"
+             data-ad-client="ca-pub-3751770644401019"
+             data-ad-slot="1939288286"></ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+    </div>
+</div>
+
+<div class="comments col-md-12 col-sm-12 col-xs-12">
+    @* Inserting new comment *@
+    <div class="InsertComment">
+        <form action="/" method="post" name="addComment" id="addComment">
+            <input type="hidden" id="idUser" name="idUser" value=@(userId != null ? userId : 2)>
+            <input type="hidden" id="idArticle" name="idArticle" value=@Html.DisplayFor(model => model.Id)>
+            <input type="hidden" id="CreatedDate" name="CreatedDate" value=@DateTime.Now.TimeOfDay />
+            @if (!isLoggedIn)
+            {
+                @Html.TextBox("AnonymousName", null, new { @placeholder = "Name", @class = "form-control inlineInput" })
+                @Html.TextBox("AnonymousEmail", null, new { @placeholder = "Email", @class = "form-control inlineInput" })  <br /><br />
+            }
+            else
+            {
+                @: Comment as
+                <b>@Html.DisplayName(Session["userFirstName"].ToString())</b>
+                <input type="hidden" id="AnonymousName" name="AnonymousName" />
+                <input type="hidden" id="AnonymousEmail" name="AnonymousEmail" />  <br /><br />
+            }
+            @Html.TextArea("commentBodyText", htmlAttributes: new { @style = "width: 100%;", @placeholder = "Enter Comments", @class = "form-control replyTextarea" })<br />
+
+            <input type="button" id="btnAddComment" name="btnAddComment" value="Add Comment " />
+        </form>
+    </div>
+    @* All comments- ajax call *@
+    <div class="allComments col-sm-12 col-xs-12" id="allArticleComments">
+    </div>
+</div>
+
+<script type="text/javascript" language="javascript">
+    window.onload = function () {
+        updateArticleComments(@Model.Id)
+        updateArticleVotePV(@Model.Vote, @Model.Id)
+    };
+</script>
+

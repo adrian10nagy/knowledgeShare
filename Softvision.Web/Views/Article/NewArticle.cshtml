@@ -1,0 +1,95 @@
+﻿@model Softvision.BL.Entities.ArticleBL
+@using Softvision.BL.Entities;
+
+@{
+    ViewBag.Title = "Become an author! Create a new article";
+	var categories = (IEnumerable<CategoryBL>)ViewData["categories"];
+    ViewBag.MetaDescription = "Become an author! Create a new article"; ;
+    var languages = (SelectList)ViewData["languages"];    
+    
+}
+
+    @if (!Softvision.All.Helpers.Base.BaseMVC.IsLoggedIn())
+    {
+        <h4>Hello, nice seeing you! Create An Article and become an author</h4>
+    }
+    else
+    {
+        <h4>Welcome back, let's Create An New Article</h4>
+    }
+<hr />
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+
+    <div class="form-horizontal">
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        @if (!Softvision.All.Helpers.Base.BaseMVC.IsLoggedIn())
+        {
+            <div class="form-group">
+                @Html.LabelFor(model => model.AnonymousName, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.AnonymousName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.AnonymousName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.AnonymousEmail, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.AnonymousEmail, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.AnonymousEmail, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        }
+
+        <div class="form-group">
+            @Html.Label("Category", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("drpCategory", new SelectList(categories, "Id", "Name"), new { @class = "form-control", @onchange = "updateSubCategory(this.value)" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Language", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("drpLanguages", languages, new { @class = "form-control" })
+            </div>
+        </div>
+
+        @* div for subCategory Ajax Call *@
+        <div class="form-group" id="subCategoryDiv">
+        </div>
+        
+        @* Load text editor *@
+        @Html.Partial("~/Views/Shared/Helpers/_textEditor.cshtml", new WritingBL { })
+
+        @* Save Article *@
+        <div>
+            <input type="submit" value="Save and Post" id="btnArticleCreate" class="btn btn-default" />
+        </div>
+    </div>
+}
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+<script type="text/javascript" language="javascript">
+    window.onload = function () {
+        updateSubCategory(@categories.FirstOrDefault().Id)
+    };
+</script>
+
+

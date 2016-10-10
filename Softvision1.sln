@@ -1,0 +1,39 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30501.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Softvision.All", "Softvision.Web\Softvision.All.csproj", "{8CB631CB-E1CE-402B-B355-2A17DE6BB726}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SDK", "SDK", "{D401A973-BC27-4F9E-A026-14B8DFED91C7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Softvision.DAL", "Softvision.DAL\Softvision.DAL.csproj", "{859D8FDF-B0C9-4644-B296-A923695A5755}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Softvision.BL", "Softvision.BL\Softvision.BL.csproj", "{65B358A8-31D0-443C-AFD3-D20D6FAEB2C3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8CB631CB-E1CE-402B-B355-2A17DE6BB726}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8CB631CB-E1CE-402B-B355-2A17DE6BB726}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8CB631CB-E1CE-402B-B355-2A17DE6BB726}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8CB631CB-E1CE-402B-B355-2A17DE6BB726}.Release|Any CPU.Build.0 = Release|Any CPU
+		{859D8FDF-B0C9-4644-B296-A923695A5755}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{859D8FDF-B0C9-4644-B296-A923695A5755}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{859D8FDF-B0C9-4644-B296-A923695A5755}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{859D8FDF-B0C9-4644-B296-A923695A5755}.Release|Any CPU.Build.0 = Release|Any CPU
+		{65B358A8-31D0-443C-AFD3-D20D6FAEB2C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{65B358A8-31D0-443C-AFD3-D20D6FAEB2C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{65B358A8-31D0-443C-AFD3-D20D6FAEB2C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{65B358A8-31D0-443C-AFD3-D20D6FAEB2C3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{859D8FDF-B0C9-4644-B296-A923695A5755} = {D401A973-BC27-4F9E-A026-14B8DFED91C7}
+	EndGlobalSection
+EndGlobal

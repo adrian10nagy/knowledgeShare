@@ -1,0 +1,106 @@
+﻿@model Softvision.BL.Entities.QuestionBL
+@using Softvision.All.Helpers.Base;
+@using Softvision.BL.Entities;
+
+@{
+    var hasCorrectMarkedAnswer = @Model.Answers.Any(a => a.Flag == AnswerFlags.Correct);
+
+    var title = (hasCorrectMarkedAnswer) ? "[Resolved]" + Model.Title : Model.Title;
+    var subCategory = Model.SubCategory;
+    var userId = Model.IdUser;
+    var loggedIn = BaseMVC.IsLoggedIn();
+    var articleId = Model.Id;
+    ViewBag.Title = subCategory + "| " + title;
+    ViewBag.MetaDescription = @Model.Title;
+}
+
+<h2>@Html.DisplayFor(model => model.Title)</h2>
+
+<div class="col-md-12 col-sm-12 col-xs-12">
+    See more from: @Html.ActionLink(@subCategory, "SubCategory", "Question", new { id = @Model.IdSubCategory + "/" + @subCategory }, null) [@Model.Answers.Count() answers]
+
+    <hr />
+    <div class="displayContextMain">
+        <div class="col-md-9 col-xs-12  leftPanel">
+            <div class="col-md-1 col-sm-3 hidden-xs leftPanel" id="votesPV">
+
+            </div>
+            <div class="col-md-11 col-sm-9 col-xs-12 rightPanel">
+                @* The question text *@
+                @Html.Raw(Model.HTMLRep)
+            </div>
+        </div>
+        <div class="col-md-3 hidden-xs rightPanel">
+
+            <table>
+                <tr>
+                    <td>Asked On: </td>
+
+                    <td>
+                        @Model.CreatedDate.ToShortDateString()
+                    </td>
+                </tr>
+                @if (Model.IdUser > 0)
+                {
+                    <tr>
+                        <td>Author: </td>
+                        <td>
+                            @Html.ActionLink(Model.User.FirstName + " " + Model.User.LastName, "Details", "Author", new { id = @Model.User.Id }, null)
+                        </td>
+                    </tr>
+                }
+                else
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayNameFor(model => model.AnonymousName)
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(model => model.AnonymousName)
+                        </td>
+                    </tr>
+                }
+
+            </table>
+        </div>
+    </div>
+</div>
+<div class="comments col-md-12 col-sm-12 col-xs-12">
+    <hr />
+    @* All comments *@
+    <div class="allComments col-sm-12 col-xs-12" id="allQuestionAnswers"></div>
+    @* Inserting new comment *@
+    <div class="InsertComment">
+        <form action="/" method="post" name="addQuestion" id="addQuestion">
+            <input type="hidden" id="idUser" name="idUser" value=@(userId != null ? userId: 2)>
+            <input type="hidden" id="idQuestion" name="idQuestion" value=@Html.DisplayFor(model=>model.Id)>
+            <input type="hidden" id="CreatedDate" name="CreatedDate" value=@DateTime.Now.TimeOfDay />
+            @if (!loggedIn)
+            {
+                @Html.TextBox("answerAnonymousName", null, new { @placeholder = "Name", @class = "form-control inlineInput" })
+                @Html.TextBox("answerAnonymousEmail", null, new { @placeholder = "Email", @class = "form-control inlineInput" })  <br /><br />
+            }
+            else
+            {
+                @: Answer as
+                <b>@Html.DisplayName(Session["userFirstName"].ToString())</b>
+                <input type="hidden" id="AnonymousName" name="AnonymousName" />
+                <input type="hidden" id="AnonymousEmail" name="AnonymousEmail" />
+            }
+            <div>
+                @Html.Partial("~/Views/Shared/Helpers/_textEditor.cshtml", new WritingBL { })
+            </div>
+
+            <input type="button" id="btnAddQuestion" name="btnAddQuestion" value="Add answer " />
+        </form>
+    </div>
+
+</div>
+
+<script type="text/javascript" language="javascript">
+    window.onload = function () {
+        updateQuestionAnswers(@Model.Id)
+        updateQuestionVotePV(@Model.Vote, @Model.Id)
+    };
+</script>

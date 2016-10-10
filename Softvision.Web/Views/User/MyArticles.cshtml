@@ -1,0 +1,45 @@
+﻿@model IEnumerable<Softvision.BL.Entities.ArticleBL>
+
+@{
+    ViewBag.Title = "MyArticles";
+}
+
+<h2>MyArticles</h2>
+
+<p>
+    @Html.ActionLink("Create New", "NewArticle","Article")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreatedDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Vote)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreatedDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Vote)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", "Article", new { id=item.Id }, null) |
+            @Html.ActionLink("View", "Details", "Article", new { id=item.Id }, null) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>

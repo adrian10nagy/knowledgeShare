@@ -1,0 +1,22 @@
+﻿@model WritingBL
+@using Softvision.BL.Entities;
+@{
+    var InternalRep = (@Model != null) ? @Model.InternalRep : string.Empty;
+}
+
+<div class="editorMain">
+    <div id="editorButtons">
+        <div class="editorButton" id="editorButtonBold" onmousedown="insertText('**[Add here]**'); return false">Bold</div>
+        <div class="editorButton" id="editorButtonCode" onmousedown="insertText('~~[Add here]~~'); return false">Code</div>
+        <div class="editorButton" id="editorButtonItalic" onmousedown="insertText('!![Add here]!!'); return false">Italic</div>
+        <div class="editorButton" id="editorButtonChapter" onmousedown="insertText('#2[Add here]#2'); return false">Chapter</div>
+        <div class="editorButton" id="editorButtonSubchapter" onmousedown="insertText('#3[Add here]#3'); return false">SubChapter</div>
+        <div class="editorButton" id="editorButtonParagraph" onmousedown="insertText('##[Add here]##'); return false">Paragraph</div>
+    </div>
+    <div class="editorTexarea">
+        <textarea id="editorTexarea" name="editorTexarea" placeholder="Add Text here">@InternalRep</textarea>
+    </div>
+</div>
+
+@*div for TrueEditor preview*@
+<div id="previewDiv"></div>

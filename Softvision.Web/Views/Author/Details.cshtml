@@ -1,0 +1,29 @@
+﻿@model Softvision.BL.Entities.UserBL
+
+@{
+    ViewBag.Title = @Model.FirstName+ @Model.LastName+"- Author";
+}
+
+<h2>@Model.FirstName @Model.LastName</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+           Member Since
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.JoinDate)
+        </dd>
+
+        <dt>
+            Contact info:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+    </dl>
+</div>

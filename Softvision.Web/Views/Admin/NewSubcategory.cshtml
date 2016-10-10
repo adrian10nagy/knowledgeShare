@@ -1,0 +1,34 @@
+﻿@using Softvision.BL.Entities;
+
+@{
+    ViewBag.Title = "New Subcategory";
+    var categories = (IEnumerable<CategoryBL>)ViewData["categories"];
+}
+
+<h2>New Subcategory</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+
+    <div class="form-group">
+        @Html.Label("Category", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownList("drpCategory", new SelectList(categories, "Id", "Name"), new { @class = "form-control", @onchange = "updateSubCategory(this.value)" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.Label("New subCategory", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <input type="text" id="newSubCategory" name="newSubCategory" class="form-control" />
+        </div>
+    </div>
+
+
+    @* Save Article *@
+    <div>
+        <input type="submit" value="Save and Post" id="btnSubCategoryCreate" class="btn btn-default" />
+    </div>
+}

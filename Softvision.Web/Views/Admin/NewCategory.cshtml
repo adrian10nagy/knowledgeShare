@@ -1,0 +1,27 @@
+﻿@using Softvision.BL.Entities;
+
+@{
+    ViewBag.Title = "New category";
+}
+
+<h2>New Subcategory</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+
+
+    <div class="form-group">
+        @Html.Label("New Category", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <input type="text" id="newCategory" name="newCategory" class="form-control" />
+        </div>
+    </div>
+
+
+    @* Save Article *@
+    <div>
+        <input type="submit" value="Save and Post" id="btnCategoryCreate" class="btn btn-default" />
+    </div>
+}

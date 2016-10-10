@@ -1,0 +1,16 @@
+﻿@{
+    ViewBag.Title = "Register! Join Developer Place Family.";
+}
+
+<div id="loginDiv">
+    @using (Html.BeginForm("Register", "User", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.ValidationSummary(true)
+        <input type="text" id="registerUserName" name="registerUserName" placeholder="Name" class="form-control" />
+        <input type="text" id="registerUserEmail" name="registerUserEmail" placeholder="Email" class="form-control" />
+        <input type="password" id="registerUserPassword" name="registerUserPassword" placeholder="Password" class="form-control" />
+        <input type="password" id="registerUserPasswordVerify" name="registerUserPasswordVerify" placeholder="Retype Password" class="form-control" />
+        <br />
+        <input type="submit" id="btnUserRegister" name="btnUserRegister" value="Let's get started!" class="btn btn-lg btn-block btn-primary" />
+    }
+</div>
